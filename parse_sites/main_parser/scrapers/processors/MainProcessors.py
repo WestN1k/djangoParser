@@ -21,13 +21,13 @@ def get_date_announcement(text, loader_context):
                    '7': 'июля', '8': 'августа', '9': 'сентября', '10': 'октября', '11': 'ноября',
                    '12': 'декабря'}
     if month == 'сегодня':  # date_time[:7]
-        return datetime.datetime.now().strftime('%Y-%m-%d')
-        # return None
+        # return datetime.datetime.now().strftime('%Y-%m-%d')
+        return None
     elif month == 'вчера':  # date_time[:5]
         date_time_yesterday = datetime.date.today() - datetime.timedelta(1)
         date_time_yesterday = date_time_yesterday.strftime('%Y-%m-%d')
-        return date_time_yesterday
-        # return None
+        # return date_time_yesterday
+        return None
     else:
         for date_i in month_table.items():
             if month == date_i[1]:

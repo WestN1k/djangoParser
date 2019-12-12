@@ -1,0 +1,60 @@
+version: '3.6'
+
+services:
+  splash:
+    image: scrapinghub/splash
+    container_name: scrap_splash
+    restart: always
+    ports:
+      - 8050:8050
+      - 5023:5023
+
+  redis:
+    image: redis:alpine
+    container_name: scrap_redis
+    ports:
+      - 6379:6379
+
+  parse_sites_admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: scrap_parse_sites_app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./parse_sites:/parse_sites_app
+    ports:
+      - 8000:8000
+    links:
+      - redis
+      - splash
+    depends_on:
+      - redis
+      - splash
+
+  worker:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: scrap_celery_worker
+      command: celery -A parse_sites worker -l info
+      volumes:
+        - ./parse_sites:/parse_sites_app
+      links:
+        - redis
+      depends_on:
+        - redis
+        - parse_sites_admin
+
+  celery-beat:
+    build: .
+    container_name: scrap_celery_beat
+    command: celery -A parse_sites beat -l info
+    volumes:
+      - ./parse_sites:/parse_sites_app
+    links:
+      - redis
+    depends_on:
+      - redis
+      - parse_sites_admin
+      - worker

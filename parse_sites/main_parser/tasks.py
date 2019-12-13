@@ -13,9 +13,13 @@ class CrawlerScript(object):
         self.crawler.crawl(self.spider, **kwargs)
         self.crawler.start()
 
+    def stop(self, **kwargs):
+        self.crawler.stop()
+
 
 @shared_task
 def run_spider(spider, **kwargs):
     scrapy_settings = get_project_settings()
     cs = CrawlerScript(spider, scrapy_settings)
     cs.run(**kwargs)
+    cs.stop()

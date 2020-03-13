@@ -5,7 +5,7 @@ from django.conf import settings
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-sys.path.append("C:/django_example/ParserOnDjango/parse_sites")
+sys.path.append(PROJECT_ROOT + "/parse_sites")
 os.environ['DJANGO_SETTINGS_MODULE'] = 'parse_sites.settings'
 
 django.setup()
@@ -36,7 +36,8 @@ SPIDER_MIDDLEWARES = {
     'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
 
-LOG_STDOUT = False
+LOG_STDOUT = True
+HTTPCACHE_ENABLED = False
 
 IMAGES_STORE = os.path.join(PROJECT_ROOT, '../images')
 
@@ -50,11 +51,23 @@ DOWNLOAD_DELAY = 3
 # ======================== SPLASH SETTINGS ===================================
 
 DSCRAPER_SPLASH_ARGS = {
-            'png': 1,
-            'width': 1200,
-            'render_all': 1,
-            'wait': 2,
+    'private_mode_enabled': 0,
+    'png': 1,
+    'width': 1900,
+    'render_all': 1,
+    'wait': 10,
 }
+
+"""
+for splash sripts
+  splash.private_mode_enabled = false
+  assert(splash:go(args.url))
+  assert(splash:wait(3))
+  splash:set_viewport_full()    
+"""
+"""
+Mozilla/5.0 (iPhone; U; CPU iPhone OS 2_2_1 like Mac OS X; en-us) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5H11 Safari/525.20
+"""
 
 SPLASH_URL = 'http://192.168.99.100:8050/'  # splash (если django настроен через docker-compose) или 192.168.99.100
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
@@ -102,4 +115,4 @@ PROXY_LIST = os.path.join(PROJECT_ROOT, 'proxy_list.txt')
 PROXY_MODE = 0
 
 # If proxy mode is 2 uncomment this sentence :
-#CUSTOM_PROXY = "http://host1:port"
+# CUSTOM_PROXY = "http://host1:port"

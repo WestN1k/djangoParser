@@ -11,10 +11,7 @@ class CrawlerScript(object):
     def run(self, **kwargs):
         # Pass the kwargs (usually command line args) to the crawler
         self.crawler.crawl(self.spider, **kwargs)
-        self.crawler.start()
-
-    def stop(self, **kwargs):
-        self.crawler.stop()
+        self.crawler.start(stop_after_crawl=False)
 
 
 @shared_task
@@ -22,4 +19,3 @@ def run_spider(spider, **kwargs):
     scrapy_settings = get_project_settings()
     cs = CrawlerScript(spider, scrapy_settings)
     cs.run(**kwargs)
-    cs.stop()

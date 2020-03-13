@@ -12,12 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from celery.schedules import crontab
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -29,7 +26,6 @@ SECRET_KEY = '51eznrb6j0h-0z2qg+=81gwu#tzhn81%-ppw*o+y3*mypx2nll'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.99.100', ]
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -57,7 +53,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'parse_sites.urls'
 
-
 # =================== celery settings ===============================
 
 CELERY_BROKER_URL = 'redis://redis:6379'  # redis
@@ -66,7 +61,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 CELERY_CELERYD_MAX_TASKS_PER_CHILD = 1
 
-#for manual celery beat shedule add
+# for manual celery beat shedule add
 # CELERY_BEAT_SCHEDULE = {
 #     'hello': {
 #         'task': 'main_parser.tasks.hello',
@@ -94,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'parse_sites.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -112,7 +106,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -132,7 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -145,7 +137,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

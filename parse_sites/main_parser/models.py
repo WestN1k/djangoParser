@@ -1,7 +1,7 @@
 from django.db import models
+from django.utils import timezone
 from dynamic_scraper.models import Scraper, SchedulerRuntime
 from scrapy_djangoitem import DjangoItem
-from django.utils import timezone
 
 
 class WebSite(models.Model):
@@ -35,6 +35,7 @@ class DataModel(models.Model):
     street = models.CharField(max_length=50, null=True, blank=True)
     house = models.CharField(max_length=20, null=True, blank=True)
     cad_num = models.CharField(max_length=50, null=True, blank=True)
+    cad_status = models.IntegerField(null=True, blank=True)
     district = models.CharField(max_length=50, null=True, blank=True)
     parse_date = models.DateField(default=timezone.now)
     parse_site = models.CharField(max_length=50, null=True, blank=True)

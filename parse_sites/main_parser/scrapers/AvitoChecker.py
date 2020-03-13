@@ -1,9 +1,9 @@
 from dynamic_scraper.spiders.django_checker import DjangoChecker
+
 from ..models import DataModel
 
 
 class AvitoChecker(DjangoChecker):
-
     name = 'avito_checker'
 
     def __init__(self, *args, **kwargs):

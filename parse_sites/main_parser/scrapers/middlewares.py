@@ -36,7 +36,6 @@ class ScrapersSpiderMiddleware(object):
     def process_spider_exception(self, response, exception, spider):
         # Called when a spider or process_spider_input() method
         # (from other spider middleware) raises an exception.
-
         # Should return either None or an iterable of Response, dict
         # or Item objects.
         pass

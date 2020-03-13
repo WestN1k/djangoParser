@@ -1,9 +1,9 @@
 from dynamic_scraper.spiders.django_spider import DjangoSpider
+
 from ..models import WebSite, DataModel, DataModelItem
 
 
 class AvitoSpider(DjangoSpider):
-
     name = 'avito_spider'
 
     def __init__(self, *args, **kwargs):
@@ -17,7 +17,6 @@ class AvitoSpider(DjangoSpider):
 
 
 class DomofondSpider(DjangoSpider):
-
     name = 'domofond_spider'
 
     def __init__(self, *args, **kwargs):
@@ -31,7 +30,6 @@ class DomofondSpider(DjangoSpider):
 
 
 class N30Spider(DjangoSpider):
-
     name = 'n30_spider'
 
     def __init__(self, *args, **kwargs):
@@ -45,7 +43,6 @@ class N30Spider(DjangoSpider):
 
 
 class ConsaltingABCSpider(DjangoSpider):
-
     name = 'consalting_spider'
 
     def __init__(self, *args, **kwargs):

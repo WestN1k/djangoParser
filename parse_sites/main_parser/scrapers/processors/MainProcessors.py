@@ -1,6 +1,5 @@
-import json
-import re
 import datetime
+import re
 import unicodedata
 
 
@@ -57,7 +56,7 @@ def get_n30_date(text, loader_context):
             date = re.findall(loader_context.get("remove_date_chars"), text)
             if len(date) > 1:
                 date_time = datetime.datetime.strptime(date[0], '%d-%m-%Y').strftime(
-                            '%Y-%m-%d')
+                    '%Y-%m-%d')
                 return date_time
     return None
 
@@ -70,23 +69,19 @@ def get_coord_point(text, loader_context):
 
 # with special for domofond
 def get_total_area(text, loader_context):
-    # clear_text = re.findall('([0-9.,]+)', text)
-    # print("===============================")
-    # print(clear_text)
-    # print(text)
-    # print("===============================")
-    # if len(clear_text) > 1:
-    #     if loader_context:
-    #         if loader_context.get('is_house') == 'False':
-    #             return _area_to_square_meters(clear_text[0])
-    #         elif loader_context.get('is_house') == 'True':
-    #             return _area_to_square_meters(clear_text[1])
-    #         else:
-    #             return None
+    clear_text = re.findall('([0-9.,]+)', text)
+
+    if len(clear_text) > 1:
+        if loader_context:
+            if loader_context.get('is_house') == 'False':
+                return _area_to_square_meters(clear_text[0])
+            else:
+                return _area_to_square_meters(clear_text[1])
+
     return _area_to_square_meters(text)
 
 
-#for domofond
+# for domofond
 def get_floor(text, loader_context):
     clear_text = re.findall('([0-9]+)', text)
     if len(clear_text) > 1:
@@ -99,7 +94,10 @@ def get_floor(text, loader_context):
 
 
 def string_replace_chars(text, loader_context):
-    return _replace_chars(text)
+    if text:
+        return _replace_chars(text)
+    else:
+        return ''
 
 
 def _replace_chars(text):
@@ -118,7 +116,7 @@ def _area_to_square_meters(text):
     return round(total_area, 2)
 
 
-#for n30
+# for n30
 def get_n30_address(text, loader_context):
     split_address = text.split(',')
     return _replace_chars(''.join(split_address[1:]))
